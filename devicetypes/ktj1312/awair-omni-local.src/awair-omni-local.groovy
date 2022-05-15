@@ -187,14 +187,14 @@ def updateAirdataValues(physicalgraph.device.HubResponse hubResponse){
 
         def resp = new JsonSlurper().parseText(msg.body)
 
-        sendEvent(name: "airQuality", value: resp.score, displayed: true)
-        sendEvent(name: "temperature", value: resp.temp, displayed: true)
-        sendEvent(name: "humidity", value: resp.humid, displayed: true)
-        sendEvent(name: "carbonDioxide", value: resp.co2, displayed: true)
-        sendEvent(name: "tvocLevel", value: resp.voc, displayed: true)
-        sendEvent(name: "fineDustLevel", value: resp.pm25, displayed: true)
-        sendEvent(name: "illuminance", value: resp.lux, displayed: true)
-        sendEvent(name: "soundPressureLevel", value: resp.spl_a, displayed: true)
+        sendEvent(name: "airQuality", value: resp.score, unit: "%", displayed: true)
+        sendEvent(name: "temperature", value: resp.temp, unit: "C", displayed: true)
+        sendEvent(name: "humidity", value: resp.humid, unit: "%", displayed: true)
+        sendEvent(name: "carbonDioxide", value: resp.co2, unit: "ppm", displayed: true)
+        sendEvent(name: "tvocLevel", value: resp.voc, unit: "ppm", displayed: true)
+        sendEvent(name: "fineDustLevel", value: resp.pm25, unit: "ug/m", displayed: true)
+        sendEvent(name: "illuminance", value: resp.lux, unit: "lux", displayed: true)
+        sendEvent(name: "soundPressureLevel", value: resp.spl_a, unit: "dB", displayed: true)
 
     } catch (e) {
         log.error "Exception caught while parsing data: "+e;
