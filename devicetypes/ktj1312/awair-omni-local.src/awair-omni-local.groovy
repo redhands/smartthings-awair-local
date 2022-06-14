@@ -37,7 +37,7 @@ metadata {
     }
 
     preferences {
-        input "awairAddress", "text", type: "text", title: "어웨어 IP 주소", description: "enter awair address must be [ip]:[port] ", required: true
+        input "awairAddress", "text", type: "text", title: "어웨어 IP 주소", description: "Enter awair address must be [ip]:[port] ", required: true
         input type: "paragraph", element: "paragraph", title: "Version", description: version(), displayDuringSetup: false
     }
 
@@ -190,7 +190,7 @@ def updateAirdataValues(physicalgraph.device.HubResponse hubResponse){
         sendEvent(name: "airQuality", value: resp.score, displayed: true)
         sendEvent(name: "temperature", value: resp.temp, displayed: true)
         sendEvent(name: "humidity", value: resp.humid, displayed: true)
-        sendEvent(name: "carbonDioxide", value: resp.co2, displayed: true)
+        sendEvent(name: "carbonDioxide", value: resp.co2, displayed: false)
         sendEvent(name: "tvocLevel", value: resp.voc, displayed: true)
         sendEvent(name: "fineDustLevel", value: resp.pm25, displayed: true)
         sendEvent(name: "illuminance", value: resp.lux, displayed: true)
@@ -210,7 +210,7 @@ def updateDeviceValues(physicalgraph.device.HubResponse hubResponse){
         def resp = new JsonSlurper().parseText(msg.body)
 
         sendEvent(name: "battery", value: resp."power-status".battery as Integer , unit: "%")
-        sendEvent(name: "powerSource", value: resp."power-status".plugged ? "dc" : "battery")
+        // sendEvent(name: "powerSource", value: resp."power-status".plugged ? "dc" : "battery")
 
     } catch (e) {
         log.error "Exception caught while parsing data: "+e;
